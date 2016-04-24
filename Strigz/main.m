@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
         
         // Передача по ссылке указателя NSError методу NSString
         
-        BOOL success = [str writeToFile:@"/tmp/cool.txt"
+        BOOL success = [str writeToFile:@"/too/darned/bad.txt"
                              atomically:YES
                                encoding:NSUTF8StringEncoding
                                   error:&error];
