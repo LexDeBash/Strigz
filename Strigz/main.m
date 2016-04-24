@@ -10,28 +10,18 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSMutableString *str = [[NSMutableString alloc] init];
-        for (int i = 0; i < 10; i++) {
-            [str appendString:@"Aaron is cool!\n"];
-        }
         
         // Здесь указатель на объект NSError объявляется без создания
         // экземпляра. Экземпляр NSError будет создан только при возникновении ошибки.
         NSError *error = nil;
         
-        // Передача по ссылке указателя NSError методу NSString
-        
-        BOOL success = [str writeToFile:@"/too/darned/bad.txt"
-                             atomically:YES
-                               encoding:NSUTF8StringEncoding
-                                  error:&error];
-        
-        // Проверка полученного флага и вывод информации
-        // из NSError в случае ошибки записи
-        if (success) {
-            NSLog(@"done writing /tmp/cool.txt");
+        NSString *str = [[NSString alloc] initWithContentsOfFile:@"/etc/resolve.conf"
+                                                        encoding:NSASCIIStringEncoding
+                                                           error:&error];
+        if (!str) {
+            NSLog(@"read failed: %@", [error localizedDescription]);
         } else {
-            NSLog(@"writing /tmp/cool.txt failed: %@", [error localizedDescription]);
+            NSLog(@"resolv.conf look like this: %@", str);
         }
         
     }
